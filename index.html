@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AlPocket CORE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0a0a0a;
+    --white: #f5f4f0;
+    --gray-1: #1a1a1a;
+    --gray-2: #2e2e2e;
+    --gray-3: #5a5a5a;
+    --gray-4: #9a9a9a;
+    --gray-5: #d4d2cc;
+    --accent: #c8b89a;
+    --danger: #b84040;
+    --mono: 'DM Mono', monospace;
+    --serif: 'Instrument Serif', serif;
+    --sans: 'Syne', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--white);
+    color: var(--black);
+    font-family: var(--mono);
+    font-size: 15px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    cursor: crosshair;
+  }
+
+  /* ─── NAWIGACJA ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background: var(--white);
+    border-bottom: 1px solid var(--gray-5);
+    mix-blend-mode: normal;
+  }
+
+  .nav-logo {
+    font-family: var(--sans);
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--black);
+    text-decoration: none;
+  }
+
+  .nav-label {
+    font-size: 11px;
+    color: var(--gray-3);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  /* ─── SEKCJE ─── */
+  section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 120px 40px 80px;
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  section.full-bleed {
+    max-width: 100%;
+    padding: 120px 0 80px;
+  }
+
+  /* ─── HERO ─── */
+  #hero {
+    min-height: 100vh;
+    justify-content: flex-end;
+    padding-bottom: 100px;
+    position: relative;
+  }
+
+  .hero-counter {
+    position: absolute;
+    top: 120px;
+    right: 40px;
+    font-size: 11px;
+    color: var(--gray-4);
+    letter-spacing: 0.2em;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+  }
+
+  .hero-tag {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gray-3);
+    margin-bottom: 48px;
+    font-family: var(--mono);
+  }
+
+  h1 {
+    font-family: var(--sans);
+    font-size: clamp(52px, 8vw, 96px);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: var(--black);
+    margin-bottom: 40px;
+  }
+
+  h1 em {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--gray-3);
+  }
+
+  .hero-sub {
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--gray-2);
+    max-width: 520px;
+    margin-bottom: 60px;
+    font-family: var(--mono);
+    font-weight: 300;
+  }
+
+  .hero-line {
+    width: 60px;
+    height: 1px;
+    background: var(--black);
+    margin-bottom: 32px;
+  }
+
+  /* ─── DIVIDER ─── */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: var(--gray-5);
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  /* ─── LABELS ─── */
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gray-4);
+    margin-bottom: 64px;
+    font-family: var(--mono);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .section-label::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 1px;
+    background: var(--gray-4);
+  }
+
+  /* ─── NAGŁÓWKI SEKCJI ─── */
+  h2 {
+    font-family: var(--sans);
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 700;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    margin-bottom: 40px;
+    color: var(--black);
+  }
+
+  h2 em {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--gray-3);
+  }
+
+  h3 {
+    font-family: var(--sans);
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 16px;
+  }
+
+  /* ─── PARAGRAFY ─── */
+  .body-text {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--gray-2);
+    max-width: 580px;
+  }
+
+  .body-text + .body-text { margin-top: 20px; }
+
+  /* ─── PROBLEM ─── */
+  #problem {
+    background: var(--black);
+    color: var(--white);
+    max-width: 100%;
+    padding: 120px 40px;
+  }
+
+  #problem .inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  #problem h2 { color: var(--white); }
+  #problem h2 em { color: var(--gray-4); }
+  #problem .body-text { color: var(--gray-5); }
+  #problem .section-label { color: var(--gray-3); }
+  #problem .section-label::before { background: var(--gray-3); }
+
+  .statement-list {
+    list-style: none;
+    margin-top: 48px;
+    border-top: 1px solid var(--gray-2);
+  }
+
+  .statement-list li {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--gray-2);
+    font-size: 20px;
+    font-family: var(--sans);
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .statement-list li .num {
+    font-size: 11px;
+    color: var(--gray-3);
+    font-family: var(--mono);
+    min-width: 32px;
+  }
+
+  /* ─── ARCHETYPY ─── */
+  .archetype-block {
+    padding: 80px 0;
+    border-bottom: 1px solid var(--gray-5);
+  }
+
+  .archetype-block:last-child { border-bottom: none; }
+
+  .archetype-number {
+    font-size: 80px;
+    font-family: var(--sans);
+    font-weight: 800;
+    color: var(--gray-5);
+    line-height: 1;
+    margin-bottom: 24px;
+    letter-spacing: -0.04em;
+  }
+
+  .archetype-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 32px;
+  }
+
+  .pill {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border: 1px solid var(--gray-5);
+    color: var(--gray-3);
+    font-family: var(--mono);
+  }
+
+  /* ─── CO TO JEST ─── */
+  #what {
+    background: var(--gray-1);
+    color: var(--white);
+    max-width: 100%;
+    padding: 120px 40px;
+  }
+
+  #what .inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  #what h2 { color: var(--white); }
+  #what .body-text { color: var(--gray-5); }
+  #what .section-label { color: var(--gray-3); }
+  #what .section-label::before { background: var(--gray-3); }
+
+  .definition-box {
+    margin-top: 48px;
+    padding: 40px;
+    border: 1px solid var(--gray-2);
+    background: rgba(255,255,255,0.03);
+  }
+
+  .definition-box p {
+    font-size: 22px;
+    line-height: 1.5;
+    color: var(--white);
+    font-family: var(--serif);
+    font-style: italic;
+  }
+
+  /* ─── WARSTWY ─── */
+  .layers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0;
+    margin-top: 48px;
+    border: 1px solid var(--gray-5);
+  }
+
+  .layer-card {
+    padding: 32px 28px;
+    border-right: 1px solid var(--gray-5);
+    position: relative;
+  }
+
+  .layer-card:last-child { border-right: none; }
+
+  .layer-tag {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gray-4);
+    font-family: var(--mono);
+    margin-bottom: 16px;
+  }
+
+  .layer-name {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 12px;
+    color: var(--black);
+  }
+
+  .layer-desc {
+    font-size: 13px;
+    color: var(--gray-3);
+    line-height: 1.6;
+    font-family: var(--mono);
+  }
+
+  .layer-card.featured {
+    background: var(--black);
+  }
+
+  .layer-card.featured .layer-name { color: var(--white); }
+  .layer-card.featured .layer-desc { color: var(--gray-4); }
+  .layer-card.featured .layer-tag { color: var(--gray-3); }
+
+  /* ─── FILTR ─── */
+  #filter {
+    background: var(--white);
+  }
+
+  .filter-list {
+    list-style: none;
+    margin-top: 40px;
+  }
+
+  .filter-list li {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--gray-5);
+    font-size: 17px;
+    color: var(--gray-2);
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    line-height: 1.5;
+  }
+
+  .filter-list li::before {
+    content: '×';
+    color: var(--danger);
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 18px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* ─── CTA ─── */
+  #cta {
+    min-height: auto;
+    padding: 160px 40px;
+    background: var(--black);
+    max-width: 100%;
+    align-items: flex-start;
+  }
+
+  #cta .inner {
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  #cta h2 {
+    color: var(--white);
+    font-size: clamp(40px, 6vw, 72px);
+    margin-bottom: 48px;
+  }
+
+  #cta h2 em { color: var(--gray-4); }
+
+  .cta-group {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 420px;
+    margin-top: 48px;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    padding: 18px 36px;
+    background: var(--white);
+    color: var(--black);
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    text-transform: uppercase;
+    cursor: crosshair;
+    transition: background 0.2s, color 0.2s;
+    border: none;
+  }
+
+  .btn-primary:hover {
+    background: var(--accent);
+    color: var(--black);
+  }
+
+  .btn-ghost {
+    display: inline-block;
+    padding: 18px 36px;
+    background: transparent;
+    color: var(--gray-4);
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    text-transform: uppercase;
+    cursor: crosshair;
+    border: 1px solid var(--gray-2);
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .btn-ghost:hover {
+    border-color: var(--gray-4);
+    color: var(--gray-5);
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--black);
+    border-top: 1px solid var(--gray-2);
+    padding: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer .logo {
+    font-family: var(--sans);
+    font-weight: 800;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: var(--gray-3);
+    text-transform: uppercase;
+  }
+
+  footer .copy {
+    font-size: 11px;
+    color: var(--gray-3);
+    font-family: var(--mono);
+  }
+
+  /* ─── ANIMATIONS ─── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ─── SCROLL INDICATOR ─── */
+  .scroll-hint {
+    position: absolute;
+    bottom: 40px;
+    left: 40px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 11px;
+    color: var(--gray-4);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .scroll-hint::before {
+    content: '';
+    display: inline-block;
+    width: 1px;
+    height: 40px;
+    background: var(--gray-4);
+    animation: scrollLine 1.5s ease-in-out infinite alternate;
+  }
+
+  @keyframes scrollLine {
+    from { opacity: 0.3; transform: scaleY(0.5) translateY(-10px); }
+    to   { opacity: 1;   transform: scaleY(1)   translateY(10px); }
+  }
+
+  /* ─── PROGRESS BAR ─── */
+  .progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 2px;
+    background: var(--black);
+    z-index: 200;
+    width: 0%;
+    transition: width 0.1s linear;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+
+    section { padding: 100px 24px 60px; }
+
+    #problem,
+    #what,
+    #cta { padding: 80px 24px; }
+
+    #cta { padding: 100px 24px; }
+
+    .layers-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .layer-card:nth-child(2) { border-right: none; }
+    .layer-card:nth-child(3) { border-top: 1px solid var(--gray-5); border-right: 1px solid var(--gray-5); }
+    .layer-card:nth-child(4) { border-top: 1px solid var(--gray-5); border-right: none; }
+
+    footer {
+      flex-direction: column;
+      gap: 12px;
+      text-align: center;
+      padding: 32px 24px;
+    }
+
+    .hero-counter { display: none; }
+    .scroll-hint { left: 24px; }
+  }
+
+  @media (max-width: 480px) {
+    .layers-grid { grid-template-columns: 1fr; }
+    .layer-card { border-right: none !important; border-top: 1px solid var(--gray-5); }
+    .layer-card:first-child { border-top: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">AlPocket CORE</a>
+  <span class="nav-label">System mentalny — nie kurs</span>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section id="hero">
+  <div class="hero-counter reveal">001 / OTWARCIE</div>
+
+  <div class="hero-tag reveal reveal-delay-1">AlPocket CORE — 2025</div>
+
+  <h1 class="reveal reveal-delay-2">
+    Masz pomysły.<br>
+    <em>Nie masz</em><br>
+    wyników.
+  </h1>
+
+  <div class="hero-line reveal reveal-delay-3"></div>
+
+  <p class="hero-sub reveal reveal-delay-3">
+    To nie jest problem z motywacją.<br>
+    Nie brakuje ci wiedzy.<br>
+    Brakuje ci systemu myślenia, który prowadzi od chaosu do decyzji.
+  </p>
+
+  <p class="hero-sub reveal reveal-delay-4" style="font-size:14px; color: var(--gray-3);">
+    I nie, nie potrzebujesz kolejnego systemu.
+  </p>
+
+  <p class="hero-sub reveal reveal-delay-4" style="font-size:14px; color: var(--gray-4); margin-top: 12px;">
+    Jeśli szukasz kursów, strategii i gotowych odpowiedzi — ta strona nie jest dla ciebie.
+  </p>
+
+  <div class="scroll-hint">Scroll</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── PROBLEM ─── -->
+<section id="problem" class="full-bleed">
+  <div class="inner">
+    <div class="section-label reveal">Problem</div>
+
+    <h2 class="reveal">
+      Decyzje, które<br><em>nigdy nie zapadają.</em>
+    </h2>
+
+    <p class="body-text reveal reveal-delay-1">
+      Masz notatki. Pliki. Tablice. Foldery. Zakładki.<br>
+      I wciąż zaczynasz od zera.
+    </p>
+
+    <ul class="statement-list reveal reveal-delay-2">
+      <li><span class="num">01</span> Zbierasz więcej niż przetwarzasz.</li>
+      <li><span class="num">02</span> Ekscytacja zastępuje ci analizę.</li>
+      <li><span class="num">03</span> Nie kończysz — bo nie zacząłeś naprawdę.</li>
+      <li><span class="num">04</span> Wiedza nie przekłada się na działanie.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ─── FERMENTATOR ─── -->
+<section id="fermentator">
+  <div class="section-label reveal">Etap 01 — Fermentator</div>
+
+  <div class="archetype-block reveal">
+    <div class="archetype-number">01</div>
+    <h2>Chaos<br><em>to surowiec.</em></h2>
+    <p class="body-text">
+      Pomysły nie są problemem. Masz ich za dużo — to dobrze.
+      Problem zaczyna się wtedy, gdy myślisz, że musisz je wszystkie "poukładać".
+    </p>
+    <p class="body-text" style="margin-top:20px">
+      Fermentator nie porządkuje. Fermentator zbiera i czeka.
+      Chaos ma naturę filtrującą — jeśli mu pozwolisz.
+    </p>
+    <div class="archetype-pills reveal reveal-delay-1">
+      <span class="pill">Pomysły to materiał</span>
+      <span class="pill">Chaos nie wymaga kontroli</span>
+      <span class="pill">Nie porządkuj od razu</span>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── SYGNAŁOWIEC ─── -->
+<section id="sygnalowiec">
+  <div class="section-label reveal">Etap 02 — Sygnałowiec</div>
+
+  <div class="archetype-block reveal">
+    <div class="archetype-number">02</div>
+    <h2>Ekscytacja<br><em>nie jest strategią.</em></h2>
+    <p class="body-text">
+      Nie każdy pomysł jest ważny. Większość znika sama — jeśli nie gotujesz go sztucznie przy życiu.
+    </p>
+    <p class="body-text" style="margin-top:20px">
+      Sygnałowiec patrzy na to, co wraca. Rzeczy wartościowe wracają bez przypomnienia.
+      To jest twój filtr. Nie narzędzie. Nie aplikacja. Ty.
+    </p>
+    <p class="body-text" style="margin-top:20px">
+      Większość rzeczy, które „chcesz zrobić", nie przetrwa twojej uwagi przez 7 dni.
+    </p>
+    <div class="archetype-pills reveal reveal-delay-1">
+      <span class="pill">Selekcja, nie organizacja</span>
+      <span class="pill">Wartościowe wraca</span>
+      <span class="pill">Filtr jest w tobie</span>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── ODDYCHAJĄCY ─── -->
+<section id="oddychajacy">
+  <div class="section-label reveal">Etap 03 — Oddychający</div>
+
+  <div class="archetype-block reveal">
+    <div class="archetype-number">03</div>
+    <h2>Wszystko<br><em>rozgrywa się w działaniu.</em></h2>
+    <p class="body-text">
+      Wiedza bez działania jest zbieraniem. Planowanie bez wykonania to fikcja kontroli.
+    </p>
+    <p class="body-text" style="margin-top:20px">
+      Oddychający bierze odpowiedzialność za efekty — nie za intencje.
+      Brak wyników rzadko jest problemem okoliczności. Jest problemem wykonania.
+    </p>
+    <div class="archetype-pills reveal reveal-delay-1">
+      <span class="pill">Działanie = odpowiedzialność</span>
+      <span class="pill">Brak efektów = brak wykonania</span>
+      <span class="pill">Wiedza bez ruchu nie istnieje</span>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CO TO JEST ─── -->
+<section id="what" class="full-bleed">
+  <div class="inner">
+    <div class="section-label reveal">Czym jest AlPocket CORE</div>
+
+    <h2 class="reveal">
+      Nie kurs.<br><em>Nie coaching.</em><br>System myślenia.
+    </h2>
+
+    <p class="body-text reveal reveal-delay-1">
+      AlPocket CORE to zestaw zasad i narzędzi mentalnych dla freelancerów i twórców,
+      którzy mają zbyt wiele pomysłów i zbyt mało domkniętych decyzji.
+    </p>
+
+    <div class="definition-box reveal reveal-delay-2">
+      <p>
+        "Nie uczymy cię myśleć. Pokazujemy ci, jak twoje myślenie
+        już działa — i gdzie cię blokuje."
+      </p>
+    </div>
+
+    <p class="body-text reveal reveal-delay-3" style="margin-top: 40px; color: var(--gray-4);">
+      Brak obietnic wyników. Brak certyfikatów. Brak społeczności wsparcia.<br>
+      Jest: precyzja, odpowiedzialność, struktura.
+    </p>
+  </div>
+</section>
+
+<!-- ─── WARSTWY ─── -->
+<section id="layers">
+  <div class="section-label reveal">Warstwy produktu</div>
+
+  <h2 class="reveal">Wybierz poziom<br><em>zaangażowania.</em></h2>
+
+  <p class="body-text reveal reveal-delay-1">
+    Każda warstwa to inny stopień głębokości — nie "więcej benefitów".
+  </p>
+
+  <div class="layers-grid reveal reveal-delay-2">
+    <div class="layer-card">
+      <div class="layer-tag">Warstwa 1</div>
+      <div class="layer-name">BASIC</div>
+      <div class="layer-desc">Wprowadzenie do trzech archetypów. Dla tych, którzy chcą sprawdzić, czy to ich język.</div>
+    </div>
+    <div class="layer-card featured">
+      <div class="layer-tag">Warstwa 2 — CORE</div>
+      <div class="layer-name">CORE</div>
+      <div class="layer-desc">Pełny system mentalny. Narzędzia, pytania, frameworki. To jest właściwy produkt.</div>
+    </div>
+    <div class="layer-card">
+      <div class="layer-tag">Warstwa 3</div>
+      <div class="layer-name">PRO</div>
+      <div class="layer-desc">CORE + praca własna z materiałem. Dla osób, które wiedzą czego szukają.</div>
+    </div>
+    <div class="layer-card">
+      <div class="layer-tag">Warstwa 4</div>
+      <div class="layer-name">PREMIUM</div>
+      <div class="layer-desc">Bezpośrednia praca. Ograniczona liczba miejsc. Bez rekrutacji otwartej.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── FILTR ─── -->
+<section id="filter">
+  <div class="section-label reveal">Filtr — kto nie powinien tego kupować</div>
+
+  <h2 class="reveal">
+    Nie dla każdego.<br><em>Serio.</em>
+  </h2>
+
+  <ul class="filter-list reveal reveal-delay-1">
+    <li>Szukasz gotowych odpowiedzi i szybkich technik.</li>
+    <li>Chcesz motywacji, społeczności i poczucia postępu.</li>
+    <li>Uważasz, że twoje problemy wynikają z braku narzędzi.</li>
+    <li>Nie jesteś gotowy wziąć odpowiedzialności za swoje wyniki.</li>
+    <li>Kupujesz kursy, żeby "mieć" — nie żeby używać.</li>
+    <li>Szukasz kogoś, kto powie ci co robić.</li>
+  </ul>
+
+  <p class="body-text reveal reveal-delay-2" style="margin-top: 40px;">
+    Jeśli widzisz siebie w powyższych punktach — nie kupuj.<br>
+    To nie ocena. To oszczędność czasu dla obu stron.
+  </p>
+</section>
+
+<!-- ─── CTA ─── -->
+<section id="cta" class="full-bleed">
+  <div class="inner">
+    <div class="section-label reveal" style="color: var(--gray-3);">
+      <span style="background: var(--gray-3); width: 24px; height: 1px; display: inline-block;"></span>
+      Decyzja
+    </div>
+
+    <h2 class="reveal">
+      Wejdź tylko<br><em>jeśli działasz.</em>
+    </h2>
+
+    <p class="body-text reveal reveal-delay-1" style="color: var(--gray-5); max-width: 480px;">
+      Nie ma okresu próbnego. Nie ma gwarancji "że zadziała".<br>
+      Jest system. Reszta zależy od ciebie.
+    </p>
+
+    <div class="cta-group reveal reveal-delay-2">
+      <a href="#" class="btn-primary">Wejdź — CORE / BASIC / PRO</a>
+      <a href="#" class="btn-ghost">Nie kupuj tego, jeśli szukasz gotowych odpowiedzi</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <span class="logo">AlPocket CORE</span>
+  <span class="copy">System mentalny dla freelancerów i twórców — 2025</span>
+</footer>
+
+<script>
+  // Progress bar
+  const progressBar = document.getElementById('progressBar');
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    progressBar.style.width = (scrolled / total * 100) + '%';
+  });
+
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
