@@ -1,3 +1,9 @@
+<!--
+ALPOCKET CORE v1.2
+WARNING: STRUCTURE LOCKED — ONLY COPY PATCHES ALLOWED
+SECTIONS FROZEN: hero / problem / fermentator / sygnalowiec / oddychajacy / what / layers / filter / cta
+IDs FROZEN: #hero #problem #fermentator #sygnalowiec #oddychajacy #what #layers #filter #cta
+-->
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -763,36 +769,34 @@
 
 <!-- ─── WARSTWY ─── -->
 <section id="layers">
-  <div class="section-label reveal">Warstwy produktu</div>
+  <div class="section-label reveal">Produkt</div>
 
-  <h2 class="reveal">Wybierz poziom<br><em>zaangażowania.</em></h2>
+  <h2 class="reveal">CORE 0.1<br><em>Jeden produkt.</em></h2>
 
   <p class="body-text reveal reveal-delay-1">
-    Każda warstwa to inny stopień głębokości — nie "więcej benefitów".
+    Nie ma pakietów. Nie ma porównań. Jest jeden system — albo go potrzebujesz, albo nie.
   </p>
 
-  <div class="layers-grid reveal reveal-delay-2">
-    <div class="layer-card">
-      <div class="layer-tag">Warstwa 1</div>
-      <div class="layer-name">BASIC</div>
-      <div class="layer-desc">Wprowadzenie do trzech archetypów. Dla tych, którzy chcą sprawdzić, czy to ich język.</div>
-    </div>
-    <div class="layer-card featured">
-      <div class="layer-tag">Warstwa 2 — CORE</div>
-      <div class="layer-name">CORE</div>
-      <div class="layer-desc">Pełny system mentalny. Narzędzia, pytania, frameworki. To jest właściwy produkt.</div>
-    </div>
-    <div class="layer-card">
-      <div class="layer-tag">Warstwa 3</div>
-      <div class="layer-name">PRO</div>
-      <div class="layer-desc">CORE + praca własna z materiałem. Dla osób, które wiedzą czego szukają.</div>
-    </div>
-    <div class="layer-card">
-      <div class="layer-tag">Warstwa 4</div>
-      <div class="layer-name">PREMIUM</div>
-      <div class="layer-desc">Bezpośrednia praca. Ograniczona liczba miejsc. Bez rekrutacji otwartej.</div>
+  <div class="layers-grid reveal reveal-delay-2" style="grid-template-columns: 1fr;">
+    <div class="layer-card featured" style="border-right: none;">
+      <div class="layer-tag">Dostępne teraz — 79 zł</div>
+      <div class="layer-name">CORE 0.1</div>
+      <div class="layer-desc" style="margin-top: 16px;">
+        PDF systemu (15–20 stron).<br>
+        3 ćwiczenia operacyjne resetujące system decyzyjny.<br>
+        Formularz diagnostyczny.<br>
+        Framework filtrowania pomysłów.<br>
+        Protokół zamykania otwartych pętli.
+      </div>
+      <div style="margin-top: 28px;">
+        <a href="https://checkout.revolut.com/pay/b6da2e57-8f46-49d1-9acf-0c3010a767be" class="btn-primary" style="background: var(--white); color: var(--black); display: inline-block;">Kupuję CORE 0.1 — 79 zł</a>
+      </div>
     </div>
   </div>
+
+  <p class="body-text reveal reveal-delay-3" style="margin-top: 32px; font-size: 13px; color: var(--gray-3);">
+    Płatność przez Revolut. Po zakupie otrzymujesz plik bezpośrednio.
+  </p>
 </section>
 
 <div class="divider"></div>
@@ -838,8 +842,8 @@
     </p>
 
     <div class="cta-group reveal reveal-delay-2">
-      <a href="#" class="btn-primary">Wejdź — CORE / BASIC / PRO</a>
-      <a href="#" class="btn-ghost">Nie kupuj tego, jeśli szukasz gotowych odpowiedzi</a>
+      <a href="https://checkout.revolut.com/pay/b6da2e57-8f46-49d1-9acf-0c3010a767be" class="btn-primary">Kupuję CORE 0.1 — 79 zł</a>
+      <a href="https://wa.me/48733923159" class="btn-ghost" target="_blank" rel="noopener">Mam pytanie — WhatsApp</a>
     </div>
   </div>
 </section>
@@ -872,162 +876,5 @@
 
   reveals.forEach(el => observer.observe(el));
 </script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CORE 0.1 — System Egzekucji Myśli</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0b0f14;
-      color: #e6e6e6;
-      line-height: 1.6;
-    }
-
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 60px 20px;
-    }
-
-    h1 {
-      font-size: 42px;
-      margin-bottom: 10px;
-      color: #ffffff;
-    }
-
-    h2 {
-      margin-top: 40px;
-      font-size: 24px;
-      color: #9aa4b2;
-    }
-
-    .tag {
-      color: #4dd4ff;
-      font-weight: bold;
-      letter-spacing: 1px;
-    }
-
-    .box {
-      background: #121a24;
-      padding: 20px;
-      border-radius: 10px;
-      margin-top: 20px;
-    }
-
-    ul {
-      padding-left: 20px;
-    }
-
-    .cta {
-      margin-top: 40px;
-      padding: 20px;
-      background: #1b2a3a;
-      border-radius: 12px;
-      text-align: center;
-    }
-
-    .button {
-      display: inline-block;
-      margin-top: 15px;
-      padding: 12px 24px;
-      background: #4dd4ff;
-      color: #000;
-      font-weight: bold;
-      text-decoration: none;
-      border-radius: 8px;
-    }
-
-    .price {
-      font-size: 28px;
-      margin-top: 10px;
-      color: #ffffff;
-    }
-
-    .muted {
-      color: #8b97a6;
-      font-size: 14px;
-    }
-
-    footer {
-      margin-top: 60px;
-      font-size: 12px;
-      color: #5a6675;
-      text-align: center;
-    }
-  </style>
-</head>
-
-<body>
-
-<div class="container">
-
-  <div class="tag">CORE 0.1 // SYSTEM OPERATING MODEL</div>
-
-  <h1>System egzekucji myśli</h1>
-
-  <p>
-    Większość ludzi nie ma problemu z pomysłami.<br>
-    Ma problem z ich zamykaniem.
-  </p>
-
-  <div class="box">
-    <strong>CORE 0.1 to nie kurs.</strong><br><br>
-    To minimalny system operacyjny dla przeciążonego umysłu:<br>
-    - redukcja nadmiaru projektów<br>
-    - filtr decyzji<br>
-    - zamykanie pętli poznawczych<br>
-  </div>
-
-  <h2>Problem</h2>
-  <p>
-    Jeśli masz w głowie więcej niż 3 aktywne kierunki naraz:<br>
-    Twój system nie działa — tylko symuluje ruch.
-  </p>
-
-  <h2>Rozwiązanie</h2>
-
-  <div class="box">
-    CORE 0.1 daje Ci:
-    <ul>
-      <li>model diagnozy przeciążenia poznawczego</li>
-      <li>3 operacyjne ćwiczenia resetujące system decyzyjny</li>
-      <li>framework filtrowania pomysłów</li>
-      <li>procedurę zamykania otwartych pętli</li>
-    </ul>
-  </div>
-
-  <h2>Co otrzymujesz</h2>
-
-  <div class="box">
-    - PDF CORE 0.1 (15–20 stron)<br>
-    - zestaw ćwiczeń operacyjnych<br>
-    - formularz diagnostyczny<br>
-  </div>
-
-  <div class="cta">
-    <div class="price">299 PLN</div>
-    <div class="muted">Jednorazowy dostęp do CORE 0.1</div>
-    <a class="button" href="#">WEJDŹ DO CORE</a>
-    <div class="muted">Revolut / Stripe / manualna obsługa na start</div>
-  </div>
-
-  <h2>Założenie systemu</h2>
-  <p>
-    CORE nie rozwiązuje Twojego życia.<br>
-    CORE usuwa szum decyzyjny, który blokuje działanie.
-  </p>
-
-  <footer>
-    CORE 0.1 // system testowy — wersja walidacyjna
-  </footer>
-
-</div>
-
 </body>
 </html>
