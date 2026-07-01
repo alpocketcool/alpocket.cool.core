@@ -1,16 +1,16 @@
 <!--
-ALPOCKET CORE v1.3_PATCH_01
+ALPOCKET CORE v1.3
 WARNING: STRUCTURE LOCKED — ONLY COPY PATCHES ALLOWED
-SECTIONS FROZEN: hero / problem / fermentator / sygnalowiec / oddychajacy / what / layers / filter / cta
-IDs FROZEN: #hero #problem #fermentator #sygnalowiec #oddychajacy #what #layers #filter #cta
-PATCH NOTE: cena startowa 70 zl zamiast 79 zl, plakietka dodana przy layer-tag i obu CTA. Zero zmian w DOM/strukturze.
+SECTIONS: hero / problem / fermentator / sygnalowiec / oddychajacy / what / layers / delivery / forkogo / faq / author / filter / cta
+IDs FROZEN: #hero #problem #fermentator #sygnalowiec #oddychajacy #what #layers #delivery #forkogo #faq #author #filter #cta
 -->
 <!DOCTYPE html>
 <html lang="pl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AlPocket CORE</title>
+<title>AlPocket CORE — System redukcji chaosu decyzyjnego</title>
+<meta name="description" content="CORE 0.1 — minimalny system operacyjny dla przeciążonego umysłu. Nie kurs. Nie coaching. System.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
 <style>
@@ -43,6 +43,7 @@ PATCH NOTE: cena startowa 70 zl zamiast 79 zl, plakietka dodana przy layer-tag i
     cursor: crosshair;
   }
 
+  /* ─── NAV ─── */
   nav {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -53,8 +54,10 @@ PATCH NOTE: cena startowa 70 zl zamiast 79 zl, plakietka dodana przy layer-tag i
     padding: 20px 40px;
     background: var(--white);
     border-bottom: 1px solid var(--gray-5);
-    mix-blend-mode: normal;
+    transition: box-shadow 0.3s ease;
   }
+
+  nav.scrolled { box-shadow: 0 1px 20px rgba(0,0,0,0.06); }
 
   .nav-logo {
     font-family: var(--sans);
@@ -64,7 +67,9 @@ PATCH NOTE: cena startowa 70 zl zamiast 79 zl, plakietka dodana przy layer-tag i
     text-transform: uppercase;
     color: var(--black);
     text-decoration: none;
+    transition: opacity 0.2s ease;
   }
+  .nav-logo:hover { opacity: 0.6; }
 
   .nav-label {
     font-size: 11px;
@@ -73,6 +78,7 @@ PATCH NOTE: cena startowa 70 zl zamiast 79 zl, plakietka dodana przy layer-tag i
     text-transform: uppercase;
   }
 
+  /* ─── SEKCJE ─── */
   section {
     min-height: 100vh;
     display: flex;
@@ -84,11 +90,22 @@ PATCH NOTE: cena startowa 70 zl zamiast 79 zl, plakietka dodana przy layer-tag i
     width: 100%;
   }
 
+  section.compact {
+    min-height: auto;
+    padding: 100px 40px;
+  }
+
   section.full-bleed {
     max-width: 100%;
     padding: 120px 0 80px;
   }
 
+  section.full-bleed.compact {
+    min-height: auto;
+    padding: 80px 0;
+  }
+
+  /* ─── HERO ─── */
   #hero {
     min-height: 100vh;
     justify-content: flex-end;
@@ -138,7 +155,7 @@ PATCH NOTE: cena startowa 70 zl zamiast 79 zl, plakietka dodana przy layer-tag i
     line-height: 1.5;
     color: var(--gray-2);
     max-width: 520px;
-    margin-bottom: 60px;
+    margin-bottom: 24px;
     font-family: var(--mono);
     font-weight: 300;
   }
@@ -150,6 +167,14 @@ PATCH NOTE: cena startowa 70 zl zamiast 79 zl, plakietka dodana przy layer-tag i
     margin-bottom: 32px;
   }
 
+  .hero-cta-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 40px;
+  }
+
+  /* ─── DIVIDER ─── */
   .divider {
     width: 100%;
     height: 1px;
@@ -158,12 +183,13 @@ PATCH NOTE: cena startowa 70 zl zamiast 79 zl, plakietka dodana przy layer-tag i
     margin: 0 auto;
   }
 
+  /* ─── LABELS ─── */
   .section-label {
     font-size: 11px;
     letter-spacing: 0.25em;
     text-transform: uppercase;
     color: var(--gray-4);
-    margin-bottom: 64px;
+    margin-bottom: 56px;
     font-family: var(--mono);
     display: flex;
     align-items: center;
@@ -176,8 +202,10 @@ PATCH NOTE: cena startowa 70 zl zamiast 79 zl, plakietka dodana przy layer-tag i
     width: 24px;
     height: 1px;
     background: var(--gray-4);
+    flex-shrink: 0;
   }
 
+  /* ─── NAGŁÓWKI ─── */
   h2 {
     font-family: var(--sans);
     font-size: clamp(36px, 5vw, 64px);
@@ -197,12 +225,13 @@ PATCH NOTE: cena startowa 70 zl zamiast 79 zl, plakietka dodana przy layer-tag i
 
   h3 {
     font-family: var(--sans);
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 700;
     letter-spacing: -0.01em;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
   }
 
+  /* ─── BODY TEXT ─── */
   .body-text {
     font-size: 16px;
     line-height: 1.7;
@@ -212,6 +241,7 @@ PATCH NOTE: cena startowa 70 zl zamiast 79 zl, plakietka dodana przy layer-tag i
 
   .body-text + .body-text { margin-top: 20px; }
 
+  /* ─── PROBLEM ─── */
   #problem {
     background: var(--black);
     color: var(--white);
@@ -245,7 +275,10 @@ PATCH NOTE: cena startowa 70 zl zamiast 79 zl, plakietka dodana przy layer-tag i
     display: flex;
     align-items: center;
     gap: 24px;
+    transition: color 0.2s ease;
   }
+
+  .statement-list li:hover { color: var(--gray-5); }
 
   .statement-list li .num {
     font-size: 11px;
@@ -254,6 +287,7 @@ PATCH NOTE: cena startowa 70 zl zamiast 79 zl, plakietka dodana przy layer-tag i
     min-width: 32px;
   }
 
+  /* ─── ARCHETYPY ─── */
   .archetype-block {
     padding: 80px 0;
     border-bottom: 1px solid var(--gray-5);
@@ -286,8 +320,15 @@ PATCH NOTE: cena startowa 70 zl zamiast 79 zl, plakietka dodana przy layer-tag i
     border: 1px solid var(--gray-5);
     color: var(--gray-3);
     font-family: var(--mono);
+    transition: border-color 0.2s ease, color 0.2s ease;
   }
 
+  .pill:hover {
+    border-color: var(--gray-3);
+    color: var(--gray-2);
+  }
+
+  /* ─── WHAT ─── */
   #what {
     background: var(--gray-1);
     color: var(--white);
@@ -310,7 +351,10 @@ PATCH NOTE: cena startowa 70 zl zamiast 79 zl, plakietka dodana przy layer-tag i
     padding: 40px;
     border: 1px solid var(--gray-2);
     background: rgba(255,255,255,0.03);
+    transition: border-color 0.3s ease;
   }
+
+  .definition-box:hover { border-color: var(--gray-3); }
 
   .definition-box p {
     font-size: 22px;
@@ -320,23 +364,104 @@ PATCH NOTE: cena startowa 70 zl zamiast 79 zl, plakietka dodana przy layer-tag i
     font-style: italic;
   }
 
-  .layers-grid {
+  /* ─── LAYERS ─── */
+  .product-card {
+    margin-top: 48px;
+    border: 1px solid var(--gray-5);
+    padding: 40px;
+    background: var(--black);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .product-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  }
+
+  .product-card .layer-tag {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gray-3);
+    font-family: var(--mono);
+    margin-bottom: 16px;
+  }
+
+  .product-card .layer-name {
+    font-family: var(--sans);
+    font-weight: 800;
+    font-size: 32px;
+    color: var(--white);
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+  }
+
+  .product-card .layer-points {
+    list-style: none;
+    margin-bottom: 32px;
+  }
+
+  .product-card .layer-points li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--gray-2);
+    color: var(--gray-5);
+    font-size: 14px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .product-card .layer-points li::before {
+    content: '✓';
+    color: var(--accent);
+    font-family: var(--sans);
+    flex-shrink: 0;
+  }
+
+  .product-card .price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+
+  .product-card .price {
+    font-family: var(--sans);
+    font-weight: 800;
+    font-size: 40px;
+    color: var(--white);
+    letter-spacing: -0.02em;
+  }
+
+  .product-card .price-label {
+    font-size: 12px;
+    color: var(--gray-3);
+    font-family: var(--mono);
+  }
+
+  /* ─── DELIVERY ─── */
+  #delivery {
+    background: var(--white);
+  }
+
+  .delivery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 0;
     margin-top: 48px;
     border: 1px solid var(--gray-5);
   }
 
-  .layer-card {
+  .delivery-item {
     padding: 32px 28px;
     border-right: 1px solid var(--gray-5);
-    position: relative;
+    transition: background 0.2s ease;
   }
 
-  .layer-card:last-child { border-right: none; }
+  .delivery-item:last-child { border-right: none; }
+  .delivery-item:hover { background: rgba(0,0,0,0.02); }
 
-  .layer-tag {
+  .delivery-item .d-label {
     font-size: 10px;
     letter-spacing: 0.25em;
     text-transform: uppercase;
@@ -345,48 +470,178 @@ PATCH NOTE: cena startowa 70 zl zamiast 79 zl, plakietka dodana przy layer-tag i
     margin-bottom: 16px;
   }
 
-  .price-badge {
-    display: inline-block;
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--black);
-    background: var(--accent);
-    padding: 4px 10px;
-    margin-left: 10px;
-    font-family: var(--mono);
-    vertical-align: middle;
-  }
-
-  .price-old {
-    text-decoration: line-through;
-    color: var(--gray-3);
-    font-size: 0.85em;
-  }
-
-  .layer-name {
+  .delivery-item .d-title {
     font-family: var(--sans);
     font-weight: 700;
-    font-size: 18px;
-    margin-bottom: 12px;
+    font-size: 16px;
+    margin-bottom: 10px;
     color: var(--black);
   }
 
-  .layer-desc {
+  .delivery-item .d-desc {
     font-size: 13px;
     color: var(--gray-3);
     line-height: 1.6;
     font-family: var(--mono);
   }
 
-  .layer-card.featured {
+  /* ─── FOR WHOM ─── */
+  #forkogo {
     background: var(--black);
+    color: var(--white);
+    max-width: 100%;
+    padding: 100px 40px;
   }
 
-  .layer-card.featured .layer-name { color: var(--white); }
-  .layer-card.featured .layer-desc { color: var(--gray-4); }
-  .layer-card.featured .layer-tag { color: var(--gray-3); }
+  #forkogo .inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
 
+  #forkogo h2 { color: var(--white); }
+  #forkogo h2 em { color: var(--gray-4); }
+  #forkogo .section-label { color: var(--gray-3); }
+  #forkogo .section-label::before { background: var(--gray-3); }
+
+  .forkogo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 0;
+    margin-top: 48px;
+    border: 1px solid var(--gray-2);
+  }
+
+  .forkogo-item {
+    padding: 28px 24px;
+    border-right: 1px solid var(--gray-2);
+    border-bottom: 1px solid var(--gray-2);
+    transition: background 0.2s ease;
+  }
+
+  .forkogo-item:hover { background: rgba(255,255,255,0.03); }
+
+  .forkogo-item .f-role {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gray-3);
+    font-family: var(--mono);
+    margin-bottom: 12px;
+  }
+
+  .forkogo-item .f-name {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--white);
+    margin-bottom: 10px;
+  }
+
+  .forkogo-item .f-desc {
+    font-size: 13px;
+    color: var(--gray-4);
+    line-height: 1.6;
+    font-family: var(--mono);
+  }
+
+  /* ─── FAQ ─── */
+  #faq {
+    background: var(--white);
+  }
+
+  .faq-list {
+    list-style: none;
+    margin-top: 48px;
+    border-top: 1px solid var(--gray-5);
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--gray-5);
+    overflow: hidden;
+  }
+
+  .faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 24px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: crosshair;
+    font-family: var(--sans);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--black);
+    text-align: left;
+    gap: 16px;
+    transition: color 0.2s ease;
+  }
+
+  .faq-question:hover { color: var(--gray-3); }
+
+  .faq-icon {
+    font-size: 20px;
+    color: var(--gray-4);
+    transition: transform 0.3s ease, color 0.2s ease;
+    flex-shrink: 0;
+    font-family: var(--mono);
+    font-weight: 300;
+  }
+
+  .faq-item.open .faq-icon {
+    transform: rotate(45deg);
+    color: var(--black);
+  }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, padding 0.35s ease;
+    font-size: 15px;
+    color: var(--gray-2);
+    line-height: 1.7;
+    font-family: var(--mono);
+    font-weight: 300;
+  }
+
+  .faq-item.open .faq-answer {
+    max-height: 200px;
+    padding-bottom: 24px;
+  }
+
+  /* ─── AUTHOR ─── */
+  #author {
+    background: var(--white);
+    min-height: auto;
+    padding: 80px 40px;
+  }
+
+  .author-line {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    max-width: 620px;
+  }
+
+  .author-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--black);
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 8px;
+  }
+
+  .author-text {
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--gray-2);
+    font-family: var(--mono);
+    font-weight: 300;
+  }
+
+  /* ─── FILTER ─── */
   #filter {
     background: var(--white);
   }
@@ -405,7 +660,10 @@ PATCH NOTE: cena startowa 70 zl zamiast 79 zl, plakietka dodana przy layer-tag i
     gap: 20px;
     align-items: flex-start;
     line-height: 1.5;
+    transition: color 0.2s ease;
   }
+
+  .filter-list li:hover { color: var(--black); }
 
   .filter-list li::before {
     content: '×';
@@ -417,6 +675,7 @@ PATCH NOTE: cena startowa 70 zl zamiast 79 zl, plakietka dodana przy layer-tag i
     margin-top: 2px;
   }
 
+  /* ─── CTA ─── */
   #cta {
     min-height: auto;
     padding: 160px 40px;
@@ -434,19 +693,28 @@ PATCH NOTE: cena startowa 70 zl zamiast 79 zl, plakietka dodana przy layer-tag i
   #cta h2 {
     color: var(--white);
     font-size: clamp(40px, 6vw, 72px);
-    margin-bottom: 48px;
+    margin-bottom: 24px;
   }
 
   #cta h2 em { color: var(--gray-4); }
 
+  .cta-note {
+    font-size: 13px;
+    color: var(--gray-3);
+    font-family: var(--mono);
+    margin-bottom: 48px;
+    max-width: 480px;
+    line-height: 1.6;
+  }
+
   .cta-group {
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    max-width: 420px;
-    margin-top: 48px;
+    gap: 12px;
+    max-width: 380px;
   }
 
+  /* ─── BUTTONS ─── */
   .btn-primary {
     display: inline-block;
     padding: 18px 36px;
@@ -458,14 +726,17 @@ PATCH NOTE: cena startowa 70 zl zamiast 79 zl, plakietka dodana przy layer-tag i
     text-decoration: none;
     text-transform: uppercase;
     cursor: crosshair;
-    transition: background 0.2s, color 0.2s;
     border: none;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+    text-align: center;
   }
 
   .btn-primary:hover {
     background: var(--accent);
-    color: var(--black);
+    transform: translateY(-1px);
   }
+
+  .btn-primary:active { transform: translateY(0); }
 
   .btn-ghost {
     display: inline-block;
@@ -479,14 +750,19 @@ PATCH NOTE: cena startowa 70 zl zamiast 79 zl, plakietka dodana przy layer-tag i
     text-transform: uppercase;
     cursor: crosshair;
     border: 1px solid var(--gray-2);
-    transition: border-color 0.2s, color 0.2s;
+    transition: border-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+    text-align: center;
   }
 
   .btn-ghost:hover {
     border-color: var(--gray-4);
     color: var(--gray-5);
+    transform: translateY(-1px);
   }
 
+  .btn-ghost:active { transform: translateY(0); }
+
+  /* ─── FOOTER ─── */
   footer {
     background: var(--black);
     border-top: 1px solid var(--gray-2);
@@ -511,22 +787,18 @@ PATCH NOTE: cena startowa 70 zl zamiast 79 zl, plakietka dodana przy layer-tag i
     font-family: var(--mono);
   }
 
-  .reveal {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
+  /* ─── PROGRESS BAR ─── */
+  .progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 2px;
+    background: var(--black);
+    z-index: 200;
+    width: 0%;
+    transition: width 0.1s linear;
   }
 
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .reveal-delay-1 { transition-delay: 0.1s; }
-  .reveal-delay-2 { transition-delay: 0.2s; }
-  .reveal-delay-3 { transition-delay: 0.3s; }
-  .reveal-delay-4 { transition-delay: 0.4s; }
-
+  /* ─── SCROLL HINT ─── */
   .scroll-hint {
     position: absolute;
     bottom: 40px;
@@ -554,50 +826,82 @@ PATCH NOTE: cena startowa 70 zl zamiast 79 zl, plakietka dodana przy layer-tag i
     to   { opacity: 1;   transform: scaleY(1)   translateY(10px); }
   }
 
-  .progress-bar {
-    position: fixed;
-    top: 0; left: 0;
-    height: 2px;
-    background: var(--black);
-    z-index: 200;
-    width: 0%;
-    transition: width 0.1s linear;
+  /* ─── REVEAL ANIMATIONS ─── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
   }
 
-  @media (max-width: 768px) {
-    nav { padding: 16px 24px; }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
 
-    section { padding: 100px 24px 60px; }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+  .reveal-delay-5 { transition-delay: 0.5s; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    .nav-label { display: none; }
+
+    section { padding: 100px 20px 60px; }
+    section.compact { padding: 80px 20px; }
+    section.full-bleed { padding: 80px 0; }
+    section.full-bleed.compact { padding: 60px 0; }
 
     #problem,
     #what,
-    #cta { padding: 80px 24px; }
+    #forkogo { padding: 80px 20px; }
 
-    #cta { padding: 100px 24px; }
+    #cta { padding: 100px 20px; }
 
-    .layers-grid {
+    h1 { font-size: clamp(40px, 12vw, 72px); }
+    h2 { font-size: clamp(30px, 8vw, 52px); }
+
+    .hero-counter { display: none; }
+    .scroll-hint { left: 20px; bottom: 30px; }
+
+    .delivery-grid {
+      grid-template-columns: 1fr;
+    }
+    .delivery-item { border-right: none; border-bottom: 1px solid var(--gray-5); }
+    .delivery-item:last-child { border-bottom: none; }
+
+    .forkogo-grid {
       grid-template-columns: 1fr 1fr;
     }
 
-    .layer-card:nth-child(2) { border-right: none; }
-    .layer-card:nth-child(3) { border-top: 1px solid var(--gray-5); border-right: 1px solid var(--gray-5); }
-    .layer-card:nth-child(4) { border-top: 1px solid var(--gray-5); border-right: none; }
+    .forkogo-item:nth-child(2n) { border-right: none; }
+
+    .hero-cta-row { flex-direction: column; }
+    .hero-cta-row .btn-primary,
+    .hero-cta-row .btn-ghost { width: 100%; }
+
+    .cta-group { max-width: 100%; }
+    .cta-group .btn-primary,
+    .cta-group .btn-ghost { width: 100%; }
 
     footer {
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
       text-align: center;
-      padding: 32px 24px;
+      padding: 28px 20px;
     }
 
-    .hero-counter { display: none; }
-    .scroll-hint { left: 24px; }
+    .product-card { padding: 28px 20px; }
+    .author-line { flex-direction: column; gap: 12px; }
   }
 
   @media (max-width: 480px) {
-    .layers-grid { grid-template-columns: 1fr; }
-    .layer-card { border-right: none !important; border-top: 1px solid var(--gray-5); }
-    .layer-card:first-child { border-top: none; }
+    .forkogo-grid { grid-template-columns: 1fr; }
+    .forkogo-item { border-right: none; }
+    .statement-list li { font-size: 16px; }
+    .faq-question { font-size: 15px; }
   }
 </style>
 </head>
@@ -605,15 +909,16 @@ PATCH NOTE: cena startowa 70 zl zamiast 79 zl, plakietka dodana przy layer-tag i
 
 <div class="progress-bar" id="progressBar"></div>
 
-<nav>
-  <a class="nav-logo" href="#">AlPocket CORE</a>
+<!-- NAV -->
+<nav id="mainNav">
+  <a class="nav-logo" href="#hero">AlPocket CORE</a>
   <span class="nav-label">System mentalny — nie kurs</span>
 </nav>
 
+<!-- ─── HERO ─── -->
 <section id="hero">
   <div class="hero-counter reveal">001 / OTWARCIE</div>
-
-  <div class="hero-tag reveal reveal-delay-1">AlPocket CORE — 2025</div>
+  <div class="hero-tag reveal reveal-delay-1">AlPocket CORE — 2026</div>
 
   <h1 class="reveal reveal-delay-2">
     Masz pomysły.<br>
@@ -633,28 +938,29 @@ PATCH NOTE: cena startowa 70 zl zamiast 79 zl, plakietka dodana przy layer-tag i
     I nie, nie potrzebujesz kolejnego systemu.
   </p>
 
-  <p class="hero-sub reveal reveal-delay-4" style="font-size:14px; color: var(--gray-4); margin-top: 12px;">
+  <p class="hero-sub reveal reveal-delay-4" style="font-size:13px; color: var(--gray-4); margin-top: 4px;">
     Jeśli szukasz kursów, strategii i gotowych odpowiedzi — ta strona nie jest dla ciebie.
   </p>
+
+  <div class="hero-cta-row reveal reveal-delay-5">
+    <a href="#layers" class="btn-primary">Przejdź do CORE</a>
+    <a href="#what" class="btn-ghost">Dowiedz się więcej</a>
+  </div>
 
   <div class="scroll-hint">Scroll</div>
 </section>
 
 <div class="divider"></div>
 
+<!-- ─── PROBLEM ─── -->
 <section id="problem" class="full-bleed">
   <div class="inner">
     <div class="section-label reveal">Problem</div>
-
-    <h2 class="reveal">
-      Decyzje, które<br><em>nigdy nie zapadają.</em>
-    </h2>
-
+    <h2 class="reveal">Decyzje, które<br><em>nigdy nie zapadają.</em></h2>
     <p class="body-text reveal reveal-delay-1">
       Masz notatki. Pliki. Tablice. Foldery. Zakładki.<br>
       I wciąż zaczynasz od zera.
     </p>
-
     <ul class="statement-list reveal reveal-delay-2">
       <li><span class="num">01</span> Zbierasz więcej niż przetwarzasz.</li>
       <li><span class="num">02</span> Ekscytacja zastępuje ci analizę.</li>
@@ -664,9 +970,9 @@ PATCH NOTE: cena startowa 70 zl zamiast 79 zl, plakietka dodana przy layer-tag i
   </div>
 </section>
 
+<!-- ─── FERMENTATOR ─── -->
 <section id="fermentator">
   <div class="section-label reveal">Etap 01 — Fermentator</div>
-
   <div class="archetype-block reveal">
     <div class="archetype-number">01</div>
     <h2>Chaos<br><em>to surowiec.</em></h2>
@@ -688,9 +994,9 @@ PATCH NOTE: cena startowa 70 zl zamiast 79 zl, plakietka dodana przy layer-tag i
 
 <div class="divider"></div>
 
+<!-- ─── SYGNAŁOWIEC ─── -->
 <section id="sygnalowiec">
   <div class="section-label reveal">Etap 02 — Sygnałowiec</div>
-
   <div class="archetype-block reveal">
     <div class="archetype-number">02</div>
     <h2>Ekscytacja<br><em>nie jest strategią.</em></h2>
@@ -714,9 +1020,9 @@ PATCH NOTE: cena startowa 70 zl zamiast 79 zl, plakietka dodana przy layer-tag i
 
 <div class="divider"></div>
 
+<!-- ─── ODDYCHAJĄCY ─── -->
 <section id="oddychajacy">
   <div class="section-label reveal">Etap 03 — Oddychający</div>
-
   <div class="archetype-block reveal">
     <div class="archetype-number">03</div>
     <h2>Wszystko<br><em>rozgrywa się w działaniu.</em></h2>
@@ -735,26 +1041,21 @@ PATCH NOTE: cena startowa 70 zl zamiast 79 zl, plakietka dodana przy layer-tag i
   </div>
 </section>
 
+<!-- ─── CO TO JEST ─── -->
 <section id="what" class="full-bleed">
   <div class="inner">
     <div class="section-label reveal">Czym jest AlPocket CORE</div>
-
-    <h2 class="reveal">
-      Nie kurs.<br><em>Nie coaching.</em> System myślenia.
-    </h2>
-
+    <h2 class="reveal">Nie kurs.<br><em>Nie coaching.</em><br>System myślenia.</h2>
     <p class="body-text reveal reveal-delay-1">
       AlPocket CORE to zestaw zasad i narzędzi mentalnych dla freelancerów i twórców,
       którzy mają zbyt wiele pomysłów i zbyt mało domkniętych decyzji.
     </p>
-
     <div class="definition-box reveal reveal-delay-2">
       <p>
         "Nie uczymy cię myśleć. Pokazujemy ci, jak twoje myślenie
         już działa — i gdzie cię blokuje."
       </p>
     </div>
-
     <p class="body-text reveal reveal-delay-3" style="margin-top: 40px; color: var(--gray-4);">
       Brak obietnic wyników. Brak certyfikatów. Brak społeczności wsparcia.<br>
       Jest: precyzja, odpowiedzialność, struktura.
@@ -762,46 +1063,194 @@ PATCH NOTE: cena startowa 70 zl zamiast 79 zl, plakietka dodana przy layer-tag i
   </div>
 </section>
 
+<!-- ─── WARSTWY / PRODUKT ─── -->
 <section id="layers">
   <div class="section-label reveal">Produkt</div>
-
   <h2 class="reveal">CORE 0.1<br><em>Jeden produkt.</em></h2>
-
   <p class="body-text reveal reveal-delay-1">
     Nie ma pakietów. Nie ma porównań. Jest jeden system — albo go potrzebujesz, albo nie.
   </p>
 
-  <div class="layers-grid reveal reveal-delay-2" style="grid-template-columns: 1fr;">
-    <div class="layer-card featured" style="border-right: none;">
-      <div class="layer-tag">Dostępne teraz — <span class="price-old">79 zł</span> 70 zł <span class="price-badge">Cena startowa</span></div>
-      <div class="layer-name">CORE 0.1</div>
-      <div class="layer-desc" style="margin-top: 16px;">
-        PDF systemu (15–20 stron).<br>
-        3 ćwiczenia operacyjne resetujące system decyzyjny.<br>
-        Formularz diagnostyczny.<br>
-        Framework filtrowania pomysłów.<br>
-        Protokół zamykania otwartych pętli.
-      </div>
-      <div style="margin-top: 28px;">
-        <a href="https://checkout.revolut.com/pay/b6da2e57-8f46-49d1-9acf-0c3010a767be" class="btn-primary" style="background: var(--white); color: var(--black); display: inline-block;">Kupuję CORE 0.1 — 70 zł <span style="opacity:0.6;">(cena startowa)</span></a>
-      </div>
+  <div class="product-card reveal reveal-delay-2">
+    <div class="layer-tag">Dostępne teraz</div>
+    <div class="layer-name">CORE 0.1</div>
+    <ul class="layer-points">
+      <li>PDF systemu — minimalny OS dla przeciążonego umysłu (15–20 stron)</li>
+      <li>Model diagnozy przeciążenia poznawczego</li>
+      <li>Framework filtrowania pomysłów — co zostaje, co odpada</li>
+      <li>Trzy archetypy przeciążenia i jak się z nich wydostać</li>
+      <li>Procedura zamykania otwartych pętli decyzyjnych</li>
+      <li>Protokół KOREKCJI SYSTEMU: DELETE / OUTSOURCE / SIMPLIFY</li>
+    </ul>
+    <div class="price-row">
+      <span class="price">70 zł</span>
+      <span class="price-label">jednorazowo / dostęp natychmiastowy</span>
     </div>
+    <a href="https://checkout.revolut.com/pay/b6da2e57-8f46-49d1-9acf-0c3010a767be"
+       class="btn-primary"
+       style="background: var(--white); color: var(--black);">
+      Kupuję CORE 0.1
+    </a>
   </div>
 
-  <p class="body-text reveal reveal-delay-3" style="margin-top: 32px; font-size: 13px; color: var(--gray-3);">
-    Płatność przez Revolut. Po zakupie otrzymujesz plik bezpośrednio.<br>
-    Cena startowa 70 zł dla pierwszych klientów — wraca do 79 zł po pierwszych zamówieniach.
+  <p class="reveal reveal-delay-3" style="margin-top: 20px; font-size: 12px; color: var(--gray-4); font-family: var(--mono);">
+    Płatność przez Revolut. PDF dostarczone na WhatsApp po weryfikacji zakupu.
   </p>
 </section>
 
 <div class="divider"></div>
 
+<!-- ─── CO OTRZYMUJESZ ─── -->
+<section id="delivery" class="compact">
+  <div class="section-label reveal">Co otrzymujesz</div>
+  <h2 class="reveal">Zawartość<br><em>bez owijania w bawełnę.</em></h2>
+
+  <div class="delivery-grid reveal reveal-delay-1">
+    <div class="delivery-item">
+      <div class="d-label">01</div>
+      <div class="d-title">PDF CORE 0.1</div>
+      <div class="d-desc">System w jednym dokumencie. Bez water, bez wypełniaczy. 15–20 stron operacyjnych.</div>
+    </div>
+    <div class="delivery-item">
+      <div class="d-label">02</div>
+      <div class="d-title">Model diagnozy</div>
+      <div class="d-desc">Narzędzie do identyfikacji gdzie twój system myślenia generuje chaos zamiast ruchu.</div>
+    </div>
+    <div class="delivery-item">
+      <div class="d-label">03</div>
+      <div class="d-title">Framework filtrowania</div>
+      <div class="d-desc">Pytania które eliminują 80% twojego mentalnego śmietnika. Bez tabel. Bez aplikacji.</div>
+    </div>
+    <div class="delivery-item">
+      <div class="d-label">04</div>
+      <div class="d-title">Trzy archetypy</div>
+      <div class="d-desc">Fermentator. Sygnałowiec. Oddychający. Każdy z protokołem wyjścia.</div>
+    </div>
+    <div class="delivery-item">
+      <div class="d-label">05</div>
+      <div class="d-title">Protokół zamykania pętli</div>
+      <div class="d-desc">Procedura dla wszystkiego co "mam zrobić ale nie robię". Status: OPEN / ACTIVE / CLOSED.</div>
+    </div>
+    <div class="delivery-item">
+      <div class="d-label">06</div>
+      <div class="d-title">Protokół KOREKCJI</div>
+      <div class="d-desc">DELETE — OUTSOURCE — SIMPLIFY. Trzy operacje resetujące system decyzyjny.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── DLA KOGO ─── -->
+<section id="forkogo" class="full-bleed compact">
+  <div class="inner">
+    <div class="section-label reveal">Dla kogo powstał CORE</div>
+    <h2 class="reveal">Konkretne<br><em>osoby. Nie persona.</em></h2>
+
+    <div class="forkogo-grid reveal reveal-delay-1">
+      <div class="forkogo-item">
+        <div class="f-role">01 / Freelancer</div>
+        <div class="f-name">Za dużo klientów, za mało decyzji</div>
+        <div class="f-desc">Żonglujesz projektami i czujesz że żaden nie idzie do przodu.</div>
+      </div>
+      <div class="forkogo-item">
+        <div class="f-role">02 / Twórca</div>
+        <div class="f-name">Pomysły nie mają końca. Produkty tak.</div>
+        <div class="f-desc">Masz notatniki pełne konceptów. Brakuje jednego: domkniętego.</div>
+      </div>
+      <div class="forkogo-item">
+        <div class="f-role">03 / ADHD</div>
+        <div class="f-name">Chaos to twoje środowisko pracy</div>
+        <div class="f-desc">CORE nie obiecuje efektów. Daje strukturę decyzji bez wymuszania nawyków.</div>
+      </div>
+      <div class="forkogo-item">
+        <div class="f-role">04 / Właściciel firmy</div>
+        <div class="f-name">Operujesz w 12 kierunkach naraz</div>
+        <div class="f-desc">Wiesz że trzeba uprościć. Nie wiesz od czego zacząć upraszczanie.</div>
+      </div>
+      <div class="forkogo-item">
+        <div class="f-role">05 / Zbieracz pomysłów</div>
+        <div class="f-name">Kolekcjonujesz zamiast robić</div>
+        <div class="f-desc">Notion, Obsidian, Roam — wszędzie notatki. Nigdzie akcji.</div>
+      </div>
+      <div class="forkogo-item">
+        <div class="f-role">06 / Osoba w przejściu</div>
+        <div class="f-name">Zmiana kierunku bez mapy</div>
+        <div class="f-desc">Wiesz czego nie chcesz. Nie wiesz jak wybrać co dalej spośród 20 opcji.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FAQ ─── -->
+<section id="faq" class="compact">
+  <div class="section-label reveal">FAQ</div>
+  <h2 class="reveal">Pytania,<br><em>które warto zadać.</em></h2>
+
+  <ul class="faq-list reveal reveal-delay-1">
+    <li class="faq-item">
+      <button class="faq-question">
+        Czy to kurs?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        Nie. CORE to system operacyjny — zestaw zasad i protokołów. Nie ma lekcji, modułów ani certyfikatu. Jest narzędzie. Używasz go albo nie.
+      </div>
+    </li>
+    <li class="faq-item">
+      <button class="faq-question">
+        Czy potrzebuję doświadczenia?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        Żadnego. CORE działa na poziomie myślenia, nie umiejętności. Jeśli masz zbyt wiele aktywnych projektów i zbyt mało domkniętych — to wystarczy.
+      </div>
+    </li>
+    <li class="faq-item">
+      <button class="faq-question">
+        Czy to działa z AI?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        Tak. Framework filtrowania i protokoły zamykania pętli działają zarówno samodzielnie jak i jako input do narzędzi AI. CORE porządkuje myślenie — AI może potem wykonywać operacje na uporządkowanym materiale.
+      </div>
+    </li>
+    <li class="faq-item">
+      <button class="faq-question">
+        Czy otrzymuję aktualizacje?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        CORE 0.1 to wersja walidacyjna. Kupujący na tym etapie otrzymają dostęp do CORE 1.0 gdy będzie gotowy. Bez dopłat.
+      </div>
+    </li>
+    <li class="faq-item">
+      <button class="faq-question">
+        Czy są gwarancje?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        Nie. CORE nie obiecuje wyników. System działa jeśli go używasz. Jeśli kupujesz żeby "mieć" — oszczędź 70 zł.
+      </div>
+    </li>
+  </ul>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── AUTOR ─── -->
+<section id="author" class="compact">
+  <div class="section-label reveal">Kim jestem</div>
+  <div class="author-line reveal reveal-delay-1">
+    <div class="author-dot"></div>
+    <p class="author-text">
+      Projekt powstał podczas budowy własnych produktów cyfrowych oraz pracy nad systemami wykorzystującymi AI. CORE to narzędzie, którego sam potrzebowałem — zanim zacząłem go budować dla innych.
+    </p>
+  </div>
+</section>
+
+<!-- ─── FILTR ─── -->
 <section id="filter">
   <div class="section-label reveal">Filtr — kto nie powinien tego kupować</div>
-
-  <h2 class="reveal">
-    Nie dla każdego.<br><em>Serio.</em>
-  </h2>
+  <h2 class="reveal">Nie dla każdego.<br><em>Serio.</em></h2>
 
   <ul class="filter-list reveal reveal-delay-1">
     <li>Szukasz gotowych odpowiedzi i szybkich technik.</li>
@@ -818,10 +1267,11 @@ PATCH NOTE: cena startowa 70 zl zamiast 79 zl, plakietka dodana przy layer-tag i
   </p>
 </section>
 
+<!-- ─── CTA ─── -->
 <section id="cta" class="full-bleed">
   <div class="inner">
     <div class="section-label reveal" style="color: var(--gray-3);">
-      <span style="background: var(--gray-3); width: 24px; height: 1px; display: inline-block;"></span>
+      <span style="background: var(--gray-3); width: 24px; height: 1px; display: inline-block; flex-shrink:0;"></span>
       Decyzja
     </div>
 
@@ -829,31 +1279,45 @@ PATCH NOTE: cena startowa 70 zl zamiast 79 zl, plakietka dodana przy layer-tag i
       Wejdź tylko<br><em>jeśli działasz.</em>
     </h2>
 
-    <p class="body-text reveal reveal-delay-1" style="color: var(--gray-5); max-width: 480px;">
+    <p class="cta-note reveal reveal-delay-1">
       Nie ma okresu próbnego. Nie ma gwarancji "że zadziała".<br>
       Jest system. Reszta zależy od ciebie.
     </p>
 
     <div class="cta-group reveal reveal-delay-2">
-      <a href="https://checkout.revolut.com/pay/b6da2e57-8f46-49d1-9acf-0c3010a767be" class="btn-primary">Kupuję CORE 0.1 — 70 zł (cena startowa)</a>
-      <a href="https://wa.me/48733923159" class="btn-ghost" target="_blank" rel="noopener">Mam pytanie — WhatsApp</a>
+      <a href="https://checkout.revolut.com/pay/b6da2e57-8f46-49d1-9acf-0c3010a767be"
+         class="btn-primary">
+        Przejdź do CORE — 70 zł
+      </a>
+      <a href="https://wa.me/48733923159"
+         class="btn-ghost"
+         target="_blank"
+         rel="noopener">
+        Mam pytanie — WhatsApp
+      </a>
     </div>
   </div>
 </section>
 
+<!-- ─── FOOTER ─── -->
 <footer>
   <span class="logo">AlPocket CORE</span>
-  <span class="copy">System mentalny dla freelancerów i twórców — 2025</span>
+  <span class="copy">System mentalny dla freelancerów i twórców — 2026</span>
 </footer>
 
 <script>
+  // Progress bar
   const progressBar = document.getElementById('progressBar');
+  const mainNav = document.getElementById('mainNav');
+
   window.addEventListener('scroll', () => {
     const scrolled = window.scrollY;
     const total = document.documentElement.scrollHeight - window.innerHeight;
     progressBar.style.width = (scrolled / total * 100) + '%';
-  });
+    mainNav.classList.toggle('scrolled', scrolled > 40);
+  }, { passive: true });
 
+  // Reveal on scroll
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -862,9 +1326,19 @@ PATCH NOTE: cena startowa 70 zl zamiast 79 zl, plakietka dodana przy layer-tag i
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
   reveals.forEach(el => observer.observe(el));
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
 </script>
 </body>
 </html>
